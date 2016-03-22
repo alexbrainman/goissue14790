@@ -1,0 +1,136 @@
+C:\dev\go\src>git sync
+
+C:\dev\go\src>git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+
+nothing to commit, working directory clean
+
+C:\dev\go\src>git fetch https://go.googlesource.com/go refs/changes/35/20835/5 && git checkout FETCH_HEAD
+remote: Counting objects: 6135, done
+remote: Finding sources: 100% (6/6)
+remote: Total 6 (delta 0), reused 1 (delta 0)
+Unpacking objects: 100% (6/6), done.
+From https://go.googlesource.com/go
+ * branch            refs/changes/35/20835/5 -> FETCH_HEAD
+Note: checking out 'FETCH_HEAD'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b new_branch_name
+
+HEAD is now at 16b1ebd... runtime: sleep less when we can do work
+
+C:\dev\go\src>git checkout -b tmp
+Switched to a new branch 'tmp'
+
+C:\dev\go\src>git checkout tmp~
+Note: checking out 'tmp~'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b new_branch_name
+
+HEAD is now at 248c3a3... regexp: avoid copying mutex in (*Regexp).Copy.
+
+C:\dev\go\src>make 2>NUL
+##### Building Go bootstrap tool.
+cmd/dist
+
+##### Building Go toolchain using c:\dev\go1.4.
+
+##### Building go_bootstrap for host, windows/amd64.
+        1 file(s) moved.
+
+##### Building packages and commands for windows/amd64.
+
+
+---
+Installed Go for windows/amd64 in C:\dev\go
+Installed commands in C:\dev\go\bin
+
+C:\dev\go\src>go test -c -o %GOPATH%\src\github.com\alexbrainman\goissue14790\20160322\before_cl20835.exe github.com/alexbrainman/goissue14790
+
+C:\dev\go\src>%GOPATH%\src\github.com\alexbrainman\goissue14790\20160322\before_cl20835.exe -test.bench=.
+testing: warning: no tests to run
+BenchmarkDefaultResolution                    50          31247200 ns/op
+Benchmark1ms                                1000           1963741 ns/op
+BenchmarkNoChannelDefaultResolution       300000              5155 ns/op
+BenchmarkNoChannel1ms                     300000              4417 ns/op
+BenchmarkOnlyChannelDefaultResolution    3000000               473 ns/op
+BenchmarkOnlyChannel1ms                  3000000               490 ns/op
+PASS
+
+C:\dev\go\src>%GOPATH%\src\github.com\alexbrainman\goissue14790\20160322\before_cl20835.exe -test.bench=.
+testing: warning: no tests to run
+BenchmarkDefaultResolution                   100          31247200 ns/op
+Benchmark1ms                                1000           1963741 ns/op
+BenchmarkNoChannelDefaultResolution       300000              5051 ns/op
+BenchmarkNoChannel1ms                     300000              4993 ns/op
+BenchmarkOnlyChannelDefaultResolution    3000000               515 ns/op
+BenchmarkOnlyChannel1ms                  3000000               455 ns/op
+PASS
+
+C:\dev\go\src>%GOPATH%\src\github.com\alexbrainman\goissue14790\20160322\before_cl20835.exe -test.trace=%GOPATH%\src\github.com\alexbrainman\goissue14790\20160322\before_cl20835.trace -test.run=nothing -test.bench=Benchmark1ms
+testing: warning: no tests to run
+Benchmark1ms        1000           1973506 ns/op
+PASS
+
+C:\dev\go\src>git checkout tmp
+Previous HEAD position was 248c3a3... regexp: avoid copying mutex in (*Regexp).Copy.
+Switched to branch 'tmp'
+
+C:\dev\go\src>make 2>NUL
+##### Building Go bootstrap tool.
+cmd/dist
+
+##### Building Go toolchain using c:\dev\go1.4.
+
+##### Building go_bootstrap for host, windows/amd64.
+        1 file(s) moved.
+
+##### Building packages and commands for windows/amd64.
+
+
+---
+Installed Go for windows/amd64 in C:\dev\go
+Installed commands in C:\dev\go\bin
+
+C:\dev\go\src>go test -c -o %GOPATH%\src\github.com\alexbrainman\goissue14790\20160322\after_cl20835.exe github.com/alexbrainman/goissue14790
+
+C:\dev\go\src>%GOPATH%\src\github.com\alexbrainman\goissue14790\20160322\after_cl20835.exe -test.bench=.
+testing: warning: no tests to run
+BenchmarkDefaultResolution                    50          31250800 ns/op
+Benchmark1ms                                1000           1959059 ns/op
+BenchmarkNoChannelDefaultResolution       300000              4948 ns/op
+BenchmarkNoChannel1ms                     300000              4267 ns/op
+BenchmarkOnlyChannelDefaultResolution    3000000               479 ns/op
+BenchmarkOnlyChannel1ms                  3000000               479 ns/op
+PASS
+
+C:\dev\go\src>%GOPATH%\src\github.com\alexbrainman\goissue14790\20160322\after_cl20835.exe -test.bench=.
+testing: warning: no tests to run
+BenchmarkDefaultResolution                    50          31250800 ns/op
+Benchmark1ms                                1000           2000076 ns/op
+BenchmarkNoChannelDefaultResolution       300000              4895 ns/op
+BenchmarkNoChannel1ms                     300000              4235 ns/op
+BenchmarkOnlyChannelDefaultResolution    3000000               484 ns/op
+BenchmarkOnlyChannel1ms                  3000000               476 ns/op
+PASS
+
+C:\dev\go\src>%GOPATH%\src\github.com\alexbrainman\goissue14790\20160322\after_cl20835.exe -test.trace=%GOPATH%\src\github.com\alexbrainman\goissue14790\20160322\after_cl20835.trace -test.run=nothing -test.bench=Benchmark1ms
+testing: warning: no tests to run
+Benchmark1ms        1000           1995193 ns/op
+PASS
+
+C:\dev\go\src>
