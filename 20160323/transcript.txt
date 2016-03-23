@@ -1,0 +1,123 @@
+C:\dev\go\src>set GOMAXPROCS=4
+
+C:\dev\go\src>git sync
+
+C:\dev\go\src>git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+
+nothing to commit, working directory clean
+
+C:\dev\go\src>git fetch https://go.googlesource.com/go refs/changes/35/20835/5 && git checkout
+From https://go.googlesource.com/go
+ * branch            refs/changes/35/20835/5 -> FETCH_HEAD
+Your branch is up-to-date with 'origin/master'.
+
+C:\dev\go\src>git checkout -b tmp
+Switched to a new branch 'tmp'
+
+C:\dev\go\src>git checkout tmp~
+Note: checking out 'tmp~'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b new_branch_name
+
+HEAD is now at 90a59d4... cmd/link: use stdlib sort in dodata
+
+C:\dev\go\src>make 2>NUL
+##### Building Go bootstrap tool.
+cmd/dist
+
+##### Building Go toolchain using c:\dev\go1.4.
+
+##### Building go_bootstrap for host, windows/amd64.
+        1 file(s) moved.
+
+##### Building packages and commands for windows/amd64.
+
+
+---
+Installed Go for windows/amd64 in C:\dev\go
+Installed commands in C:\dev\go\bin
+
+C:\dev\go\src>go test -c -o %GOPATH%\src\github.com\alexbrainman\goissue14790\20160323\before_cl20835.exe github.com/alexbrainman/goissue14790
+
+C:\dev\go\src>%GOPATH%\src\github.com\alexbrainman\goissue14790\20160323\before_cl20835.exe -test.bench=.
+testing: warning: no tests to run
+BenchmarkDefaultResolution-4                         100          15781351 ns/op
+Benchmark1ms-4                                      2000            978064 ns/op
+BenchmarkNoChannelDefaultResolution-4             200000              5156 ns/op
+BenchmarkNoChannel1ms-4                           300000              4785 ns/op
+BenchmarkOnlyChannelDefaultResolution-4          3000000               515 ns/op
+BenchmarkOnlyChannel1ms-4                        3000000               491 ns/op
+PASS
+
+C:\dev\go\src>%GOPATH%\src\github.com\alexbrainman\goissue14790\20160323\before_cl20835.exe -test.bench=.
+testing: warning: no tests to run
+BenchmarkDefaultResolution-4                         100          15625100 ns/op
+Benchmark1ms-4                                      2000            980506 ns/op
+BenchmarkNoChannelDefaultResolution-4             200000              5078 ns/op
+BenchmarkNoChannel1ms-4                           300000              4362 ns/op
+BenchmarkOnlyChannelDefaultResolution-4          3000000               484 ns/op
+BenchmarkOnlyChannel1ms-4                        3000000               472 ns/op
+PASS
+
+C:\dev\go\src>%GOPATH%\src\github.com\alexbrainman\goissue14790\20160323\before_cl20835.exe -test.trace=%GOPATH%\src\github.com\alexbrainman\goissue14790\20160323\before_cl20835.trace -test.run=nothing -test.bench=Benchmark1ms
+testing: warning: no tests to run
+Benchmark1ms-4                                      2000            984901 ns/op
+PASS
+
+C:\dev\go\src>git checkout tmp
+Previous HEAD position was 90a59d4... cmd/link: use stdlib sort in dodata
+Switched to branch 'tmp'
+
+C:\dev\go\src>make 2>NUL
+##### Building Go bootstrap tool.
+cmd/dist
+
+##### Building Go toolchain using c:\dev\go1.4.
+
+##### Building go_bootstrap for host, windows/amd64.
+        1 file(s) moved.
+
+##### Building packages and commands for windows/amd64.
+
+
+---
+Installed Go for windows/amd64 in C:\dev\go
+Installed commands in C:\dev\go\bin
+
+C:\dev\go\src>go test -c -o %GOPATH%\src\github.com\alexbrainman\goissue14790\20160323\after_cl20835.exe github.com/alexbrainman/goissue14790
+
+C:\dev\go\src>%GOPATH%\src\github.com\alexbrainman\goissue14790\20160323\after_cl20835.exe -test.bench=.
+testing: warning: no tests to run
+BenchmarkDefaultResolution-4                         100          15626300 ns/op
+Benchmark1ms-4                                      2000            977576 ns/op
+BenchmarkNoChannelDefaultResolution-4             300000              4219 ns/op
+BenchmarkNoChannel1ms-4                           300000              4153 ns/op
+BenchmarkOnlyChannelDefaultResolution-4          3000000               489 ns/op
+BenchmarkOnlyChannel1ms-4                        3000000               487 ns/op
+PASS
+
+C:\dev\go\src>%GOPATH%\src\github.com\alexbrainman\goissue14790\20160323\after_cl20835.exe -test.bench=.
+testing: warning: no tests to run
+BenchmarkDefaultResolution-4                         100          15626300 ns/op
+Benchmark1ms-4                                      2000            978553 ns/op
+BenchmarkNoChannelDefaultResolution-4             300000              4323 ns/op
+BenchmarkNoChannel1ms-4                           300000              4267 ns/op
+BenchmarkOnlyChannelDefaultResolution-4          3000000               494 ns/op
+BenchmarkOnlyChannel1ms-4                        3000000               480 ns/op
+PASS
+
+C:\dev\go\src>%GOPATH%\src\github.com\alexbrainman\goissue14790\20160323\after_cl20835.exe -test.trace=%GOPATH%\src\github.com\alexbrainman\goissue14790\20160323\after_cl20835.trace -test.run=nothing -test.bench=Benchmark1ms
+testing: warning: no tests to run
+Benchmark1ms-4                                      2000            980994 ns/op
+PASS
+
+C:\dev\go\src>
