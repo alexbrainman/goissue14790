@@ -1,0 +1,13 @@
+diff --git a/src/runtime/os1_windows.go b/src/runtime/os1_windows.go
+index 8d46bca..6103889 100644
+--- a/src/runtime/os1_windows.go
++++ b/src/runtime/os1_windows.go
+@@ -550,7 +550,7 @@ func usleep1(usec uint32)
+ 
+ //go:nosplit
+ func osyield() {
+-	usleep1(1)
++	//usleep1(1)
+ }
+ 
+ //go:nosplit
