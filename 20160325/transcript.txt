@@ -1,0 +1,309 @@
+C:\dev\go\src>git sync
+
+C:\dev\go\src>git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+
+nothing to commit, working directory clean
+
+C:\dev\go\src>git fetch https://go.googlesource.com/go refs/changes/35/20835/5 && git checkout FETCH_HEAD
+From https://go.googlesource.com/go
+ * branch            refs/changes/35/20835/5 -> FETCH_HEAD
+Note: checking out 'FETCH_HEAD'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b new_branch_name
+
+HEAD is now at 16b1ebd... runtime: sleep less when we can do work
+
+C:\dev\go\src>git checkout -b tmp
+Switched to a new branch 'tmp'
+
+C:\dev\go\src>git checkout tmp~
+Note: checking out 'tmp~'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b new_branch_name
+
+HEAD is now at 248c3a3... regexp: avoid copying mutex in (*Regexp).Copy.
+
+C:\dev\go\src>make 2>NUL
+##### Building Go bootstrap tool.
+cmd/dist
+
+##### Building Go toolchain using c:\dev\go1.4.
+
+##### Building go_bootstrap for host, windows/amd64.
+        1 file(s) moved.
+
+##### Building packages and commands for windows/amd64.
+
+
+---
+Installed Go for windows/amd64 in C:\dev\go
+Installed commands in C:\dev\go\bin
+
+C:\dev\go\src>set GOMAXPROCS=1
+
+C:\dev\go\src>go test -c -o %GOPATH%\src\github.com\alexbrainman\goissue14790\20160325\before_cl20835_gomaxproc1.exe github.com/alexbrainman/goissue14790
+
+C:\dev\go\src>%GOPATH%\src\github.com\alexbrainman\goissue14790\20160325\before_cl20835_gomaxproc1.exe -test.bench=.
+testing: warning: no tests to run
+BenchmarkDefaultResolution                                    50          31250000 ns/op
+Benchmark1ms                                                1000           1968624 ns/op
+BenchmarkNoChannelDefaultResolution                       300000              4843 ns/op
+BenchmarkNoChannel1ms                                     300000              4377 ns/op
+BenchmarkOnlyChannelDefaultResolution                    3000000               484 ns/op
+BenchmarkOnlyChannel1ms                                  3000000               493 ns/op
+BenchmarkNoChannelWith100usDelayDefaultResolution          10000            145312 ns/op
+BenchmarkNoChannelWith100usDelay1ms                        10000            142959 ns/op
+PASS
+
+C:\dev\go\src>%GOPATH%\src\github.com\alexbrainman\goissue14790\20160325\before_cl20835_gomaxproc1.exe -test.bench=.
+testing: warning: no tests to run
+BenchmarkDefaultResolution                                   100          31250000 ns/op
+Benchmark1ms                                                1000           2684398 ns/op
+BenchmarkNoChannelDefaultResolution                       300000             10364 ns/op
+BenchmarkNoChannel1ms                                     300000              5038 ns/op
+BenchmarkOnlyChannelDefaultResolution                    3000000               494 ns/op
+BenchmarkOnlyChannel1ms                                  3000000               492 ns/op
+BenchmarkNoChannelWith100usDelayDefaultResolution          10000            145312 ns/op
+BenchmarkNoChannelWith100usDelay1ms                        10000            143740 ns/op
+PASS
+
+C:\dev\go\src>%GOPATH%\src\github.com\alexbrainman\goissue14790\20160325\before_cl20835_gomaxproc1.exe -test.trace=%GOPATH%\src\github.com\alexbrainman\goissue14790\20160325\before_cl20835_gomaxproc1.trace -test.run=nothing -test.bench=Benchmark1ms
+testing: warning: no tests to run
+Benchmark1ms        1000           1958859 ns/op
+PASS
+
+C:\dev\go\src>set GOMAXPROCS=4
+
+C:\dev\go\src>go test -c -o %GOPATH%\src\github.com\alexbrainman\goissue14790\20160325\before_cl20835_gomaxproc4.exe github.com/alexbrainman/goissue14790
+
+C:\dev\go\src>%GOPATH%\src\github.com\alexbrainman\goissue14790\20160325\before_cl20835_gomaxproc4.exe -test.bench=.
+testing: warning: no tests to run
+BenchmarkDefaultResolution-4                                 100          15781250 ns/op
+Benchmark1ms-4                                              2000            982359 ns/op
+BenchmarkNoChannelDefaultResolution-4                     200000              5078 ns/op
+BenchmarkNoChannel1ms-4                                   300000              5133 ns/op
+BenchmarkOnlyChannelDefaultResolution-4                  3000000               526 ns/op
+BenchmarkOnlyChannel1ms-4                                3000000               479 ns/op
+BenchmarkNoChannelWith100usDelayDefaultResolution-4        10000            140625 ns/op
+BenchmarkNoChannelWith100usDelay1ms-4                      10000            138858 ns/op
+PASS
+
+C:\dev\go\src>%GOPATH%\src\github.com\alexbrainman\goissue14790\20160325\before_cl20835_gomaxproc4.exe -test.bench=.
+testing: warning: no tests to run
+BenchmarkDefaultResolution-4                                 100          15781250 ns/op
+Benchmark1ms-4                                              2000            984312 ns/op
+BenchmarkNoChannelDefaultResolution-4                     200000              5078 ns/op
+BenchmarkNoChannel1ms-4                                   300000              4635 ns/op
+BenchmarkOnlyChannelDefaultResolution-4                  3000000               510 ns/op
+BenchmarkOnlyChannel1ms-4                                3000000               491 ns/op
+BenchmarkNoChannelWith100usDelayDefaultResolution-4        10000            146875 ns/op
+BenchmarkNoChannelWith100usDelay1ms-4                      10000            143838 ns/op
+PASS
+
+C:\dev\go\src>%GOPATH%\src\github.com\alexbrainman\goissue14790\20160325\before_cl20835_gomaxproc4.exe -test.trace=%GOPATH%\src\github.com\alexbrainman\goissue14790\20160325\before_cl20835_gomaxproc4.trace -test.run=nothing -test.bench=Benchmark1ms
+testing: warning: no tests to run
+Benchmark1ms-4      2000            980406 ns/op
+PASS
+
+C:\dev\go\src>git checkout tmp
+Previous HEAD position was 248c3a3... regexp: avoid copying mutex in (*Regexp).Copy.
+Switched to branch 'tmp'
+
+C:\dev\go\src>make 2>NUL
+##### Building Go bootstrap tool.
+cmd/dist
+
+##### Building Go toolchain using c:\dev\go1.4.
+
+##### Building go_bootstrap for host, windows/amd64.
+        1 file(s) moved.
+
+##### Building packages and commands for windows/amd64.
+
+
+---
+Installed Go for windows/amd64 in C:\dev\go
+Installed commands in C:\dev\go\bin
+
+C:\dev\go\src>set GOMAXPROCS=1
+
+C:\dev\go\src>go test -c -o %GOPATH%\src\github.com\alexbrainman\goissue14790\20160325\after_cl20835_gomaxproc1.exe github.com/alexbrainman/goissue14790
+
+C:\dev\go\src>%GOPATH%\src\github.com\alexbrainman\goissue14790\20160325\after_cl20835_gomaxproc1.exe -test.bench=.
+testing: warning: no tests to run
+BenchmarkDefaultResolution                                   100          31250400 ns/op
+Benchmark1ms                                                1000           1968825 ns/op
+BenchmarkNoChannelDefaultResolution                       300000              5104 ns/op
+BenchmarkNoChannel1ms                                     300000              5065 ns/op
+BenchmarkOnlyChannelDefaultResolution                    3000000               593 ns/op
+BenchmarkOnlyChannel1ms                                  3000000               583 ns/op
+BenchmarkNoChannelWith100usDelayDefaultResolution          10000            170314 ns/op
+BenchmarkNoChannelWith100usDelay1ms                        10000            170416 ns/op
+PASS
+
+C:\dev\go\src>%GOPATH%\src\github.com\alexbrainman\goissue14790\20160325\after_cl20835_gomaxproc1.exe -test.bench=.
+testing: warning: no tests to run
+BenchmarkDefaultResolution                                   100          31250400 ns/op
+Benchmark1ms                                                1000           1963942 ns/op
+BenchmarkNoChannelDefaultResolution                       300000              5156 ns/op
+BenchmarkNoChannel1ms                                     300000              5140 ns/op
+BenchmarkOnlyChannelDefaultResolution                    2000000               585 ns/op
+BenchmarkOnlyChannel1ms                                  3000000               584 ns/op
+BenchmarkNoChannelWith100usDelayDefaultResolution          10000            170314 ns/op
+BenchmarkNoChannelWith100usDelay1ms                        10000            150884 ns/op
+PASS
+
+C:\dev\go\src>%GOPATH%\src\github.com\alexbrainman\goissue14790\20160325\after_cl20835_gomaxproc1.exe -test.trace=%GOPATH%\src\github.com\alexbrainman\goissue14790\20160325\after_cl20835_gomaxproc1.trace -test.run=nothing -test.bench=Benchmark1ms
+testing: warning: no tests to run
+Benchmark1ms        1000           1959059 ns/op
+PASS
+
+C:\dev\go\src>set GOMAXPROCS=4
+
+C:\dev\go\src>go test -c -o %GOPATH%\src\github.com\alexbrainman\goissue14790\20160325\after_cl20835_gomaxproc4.exe github.com/alexbrainman/goissue14790
+
+C:\dev\go\src>%GOPATH%\src\github.com\alexbrainman\goissue14790\20160325\after_cl20835_gomaxproc4.exe -test.bench=.
+testing: warning: no tests to run
+BenchmarkDefaultResolution-4                                 100          15625300 ns/op
+Benchmark1ms-4                                              2000            982947 ns/op
+BenchmarkNoChannelDefaultResolution-4                     200000              5000 ns/op
+BenchmarkNoChannel1ms-4                                   300000              5062 ns/op
+BenchmarkOnlyChannelDefaultResolution-4                  3000000               593 ns/op
+BenchmarkOnlyChannel1ms-4                                3000000               588 ns/op
+BenchmarkNoChannelWith100usDelayDefaultResolution-4        10000            170315 ns/op
+BenchmarkNoChannelWith100usDelay1ms-4                      10000            172955 ns/op
+PASS
+
+C:\dev\go\src>%GOPATH%\src\github.com\alexbrainman\goissue14790\20160325\after_cl20835_gomaxproc4.exe -test.bench=.
+testing: warning: no tests to run
+BenchmarkDefaultResolution-4                                 100          15625300 ns/op
+Benchmark1ms-4                                              2000            977088 ns/op
+BenchmarkNoChannelDefaultResolution-4                     300000              4218 ns/op
+BenchmarkNoChannel1ms-4                                   300000              4300 ns/op
+BenchmarkOnlyChannelDefaultResolution-4                  3000000               505 ns/op
+BenchmarkOnlyChannel1ms-4                                3000000               493 ns/op
+BenchmarkNoChannelWith100usDelayDefaultResolution-4        10000            143752 ns/op
+BenchmarkNoChannelWith100usDelay1ms-4                      10000            142876 ns/op
+PASS
+
+C:\dev\go\src>%GOPATH%\src\github.com\alexbrainman\goissue14790\20160325\after_cl20835_gomaxproc4.exe -test.trace=%GOPATH%\src\github.com\alexbrainman\goissue14790\20160325\after_cl20835_gomaxproc4.trace -test.run=nothing -test.bench=Benchmark1ms
+testing: warning: no tests to run
+Benchmark1ms-4      2000            980894 ns/op
+PASS
+
+C:\dev\go\src>git apply %GOPATH%\src\github.com\alexbrainman\goissue14790\20160325\osyield.patch
+
+C:\dev\go\src>git diff
+diff --git a/src/runtime/os1_windows.go b/src/runtime/os1_windows.go
+index 8d46bca..6103889 100644
+--- a/src/runtime/os1_windows.go
++++ b/src/runtime/os1_windows.go
+@@ -550,7 +550,7 @@ func usleep1(usec uint32)
+
+ //go:nosplit
+ func osyield() {
+-       usleep1(1)
++       //usleep1(1)
+ }
+
+ //go:nosplit
+
+C:\dev\go\src>make 2>NUL
+##### Building Go bootstrap tool.
+cmd/dist
+
+##### Building Go toolchain using c:\dev\go1.4.
+
+##### Building go_bootstrap for host, windows/amd64.
+        1 file(s) moved.
+
+##### Building packages and commands for windows/amd64.
+
+
+---
+Installed Go for windows/amd64 in C:\dev\go
+Installed commands in C:\dev\go\bin
+
+C:\dev\go\src>set GOMAXPROCS=1
+
+C:\dev\go\src>go test -c -o %GOPATH%\src\github.com\alexbrainman\goissue14790\20160325\after_osyeld_patch_gomaxproc1.exe github.com/alexbrainman/goissue14790
+
+C:\dev\go\src>%GOPATH%\src\github.com\alexbrainman\goissue14790\20160325\after_osyeld_patch_gomaxproc1.exe -test.bench=.
+testing: warning: no tests to run
+BenchmarkDefaultResolution                                    50          31249800 ns/op
+Benchmark1ms                                                1000           1953000 ns/op
+BenchmarkNoChannelDefaultResolution                       300000              4374 ns/op
+BenchmarkNoChannel1ms                                     300000              4358 ns/op
+BenchmarkOnlyChannelDefaultResolution                    3000000               489 ns/op
+BenchmarkOnlyChannel1ms                                  3000000               498 ns/op
+BenchmarkNoChannelWith100usDelayDefaultResolution          10000            146874 ns/op
+BenchmarkNoChannelWith100usDelay1ms                        10000            145596 ns/op
+PASS
+
+C:\dev\go\src>%GOPATH%\src\github.com\alexbrainman\goissue14790\20160325\after_osyeld_patch_gomaxproc1.exe -test.bench=.
+testing: warning: no tests to run
+BenchmarkDefaultResolution                                   100          32499792 ns/op
+Benchmark1ms                                                1000           1962765 ns/op
+BenchmarkNoChannelDefaultResolution                       300000              4270 ns/op
+BenchmarkNoChannel1ms                                     300000              4335 ns/op
+BenchmarkOnlyChannelDefaultResolution                    3000000               499 ns/op
+BenchmarkOnlyChannel1ms                                  3000000               493 ns/op
+BenchmarkNoChannelWith100usDelayDefaultResolution          10000            148436 ns/op
+BenchmarkNoChannelWith100usDelay1ms                        10000            146572 ns/op
+PASS
+
+C:\dev\go\src>%GOPATH%\src\github.com\alexbrainman\goissue14790\20160325\after_osyeld_patch_gomaxproc1.exe -test.trace=%GOPATH%\src\github.com\alexbrainman\goissue14790\20160325\after_osyeld_patch_gomaxproc1.trace -test.run=nothing -test.bench=Benchmark1ms
+testing: warning: no tests to run
+Benchmark1ms        1000           1959835 ns/op
+PASS
+
+C:\dev\go\src>set GOMAXPROCS=4
+
+C:\dev\go\src>go test -c -o %GOPATH%\src\github.com\alexbrainman\goissue14790\20160325\after_osyeld_patch_gomaxproc4.exe github.com/alexbrainman/goissue14790
+
+C:\dev\go\src>%GOPATH%\src\github.com\alexbrainman\goissue14790\20160325\after_osyeld_patch_gomaxproc4.exe -test.bench=.
+testing: warning: no tests to run
+BenchmarkDefaultResolution-4                              200000              7968 ns/op
+Benchmark1ms-4                                            200000              8086 ns/op
+BenchmarkNoChannelDefaultResolution-4                     500000              4406 ns/op
+BenchmarkNoChannel1ms-4                                   500000              4273 ns/op
+BenchmarkOnlyChannelDefaultResolution-4                  3000000               505 ns/op
+BenchmarkOnlyChannel1ms-4                                3000000               504 ns/op
+BenchmarkNoChannelWith100usDelayDefaultResolution-4        10000            146875 ns/op
+BenchmarkNoChannelWith100usDelay1ms-4                      10000            148247 ns/op
+PASS
+
+C:\dev\go\src>%GOPATH%\src\github.com\alexbrainman\goissue14790\20160325\after_osyeld_patch_gomaxproc4.exe -test.bench=.
+testing: warning: no tests to run
+BenchmarkDefaultResolution-4                              100000             10000 ns/op
+Benchmark1ms-4                                            200000              8169 ns/op
+BenchmarkNoChannelDefaultResolution-4                     500000              4406 ns/op
+BenchmarkNoChannel1ms-4                                   300000              4329 ns/op
+BenchmarkOnlyChannelDefaultResolution-4                  3000000               500 ns/op
+BenchmarkOnlyChannel1ms-4                                3000000               513 ns/op
+BenchmarkNoChannelWith100usDelayDefaultResolution-4        10000            146875 ns/op
+BenchmarkNoChannelWith100usDelay1ms-4                      10000            147368 ns/op
+PASS
+
+C:\dev\go\src>%GOPATH%\src\github.com\alexbrainman\goissue14790\20160325\after_osyeld_patch_gomaxproc4.exe -test.trace=%GOPATH%\src\github.com\alexbrainman\goissue14790\20160325\after_osyeld_patch_gomaxproc4.trace -test.run=nothing -test.bench=Benchmark1ms
+testing: warning: no tests to run
+Benchmark1ms-4    100000             18096 ns/op
+PASS
+
+C:\dev\go\src>
