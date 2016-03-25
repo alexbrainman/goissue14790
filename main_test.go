@@ -122,3 +122,50 @@ func BenchmarkOnlyChannel1ms(b *testing.B) {
 	benchOnlyChannel(b)
 	timeEndPeriod(1)
 }
+
+var (
+	alwaysFalse = false
+	workSink    = 0
+)
+
+func localWork(w int) {
+	foo := 0
+	for i := 0; i < w; i++ {
+		foo /= (foo + 1)
+	}
+	if alwaysFalse {
+		workSink += foo
+	}
+}
+
+func benchNoChannelWith100usDelay(b *testing.B) {
+	event1, err := createEvent()
+	if err != nil {
+		b.Fatal(err)
+	}
+	event2, err := createEvent()
+	if err != nil {
+		b.Fatal(err)
+	}
+	go func() {
+		for {
+			syscall.WaitForSingleObject(event1, syscall.INFINITE)
+			localWork(10000)
+			setEvent(event2)
+		}
+	}()
+	for i := 0; i < b.N; i++ {
+		setEvent(event1)
+		syscall.WaitForSingleObject(event2, syscall.INFINITE)
+	}
+}
+
+func BenchmarkNoChannelWith100usDelayDefaultResolution(b *testing.B) {
+	benchNoChannelWith100usDelay(b)
+}
+
+func BenchmarkNoChannelWith100usDelay1ms(b *testing.B) {
+	timeBeginPeriod(1)
+	benchNoChannelWith100usDelay(b)
+	timeEndPeriod(1)
+}
